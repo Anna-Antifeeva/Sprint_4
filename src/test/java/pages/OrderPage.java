@@ -1,4 +1,4 @@
-package PageObject;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -7,29 +7,29 @@ import org.openqa.selenium.WebDriver;
 public class OrderPage {
     private WebDriver driver;
     //Поле "имя"
-    private By nameField = By.xpath(".//input[@placeholder='* Имя']");
+    private static final By nameField = By.xpath(".//input[@placeholder='* Имя']");
     //Поле "фамилия"
-    private By surnameField = By.xpath(".//input[@placeholder='* Фамилия']");
+    private static final By surnameField = By.xpath(".//input[@placeholder='* Фамилия']");
     //Поле "Адрес:куда привезти заказ"
-    private By addressField = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
+    private static final By addressField = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
     //Поле "Станция метро"
-    private By metroStationField = By.xpath(".//input[@placeholder='* Станция метро']");
+    private static final By metroStationField = By.xpath(".//input[@placeholder='* Станция метро']");
     //Поле "Номер телефона"
-    private By phoneNumberField = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
+    private static final By phoneNumberField = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
     //Кнопка "Далее"
-    private By nextButton = By.xpath(".//button[text()='Далее']");
+    private static final By nextButton = By.xpath(".//button[text()='Далее']");
     //Поле "Куда привезти самокат"
-    private By orderDateField = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
+    private static final By orderDateField = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
     //Выпадающий список срока аренды
-    private By rentalPeriodField = By.xpath(".//div[@class='Dropdown-placeholder' and text()='* Срок аренды']/..");
+    private static final By rentalPeriodField = By.xpath(".//div[@class='Dropdown-placeholder' and text()='* Срок аренды']/..");
     //Поле "Комментарий курьеру"
-    private By commentField = By.xpath(".//input[@placeholder='Комментарий для курьера']");
+    private static final By commentField = By.xpath(".//input[@placeholder='Комментарий для курьера']");
     //Кнопка "Забронировать"
-    private By orderButton = By.xpath(".//div[@class='Order_Buttons__1xGrp']//button[text()='Заказать']");
+    private static final By orderButton = By.xpath(".//div[@class='Order_Buttons__1xGrp']//button[text()='Заказать']");
     //Кнопка подтверждения заказа
-    private By yesButton = By.xpath(".//div[@class='Order_Modal__YZ-d3']//button[text()='Да']");
+    private static final By yesButton = By.xpath(".//div[@class='Order_Modal__YZ-d3']//button[text()='Да']");
     // Окно об успешном заказе самоката
-    private By orderModal = By.className("Order_Modal__YZ-d3");
+    private static final By orderModal = By.xpath(".//div[contains(text(), 'Заказ оформлен')]");
 
     public OrderPage(WebDriver driver) {
         this.driver = driver;
@@ -42,6 +42,10 @@ public class OrderPage {
         driver.findElement(metroStationField).click();
         driver.findElement(By.xpath(".//div[text()='" + metroStation + "']")).click();
         driver.findElement(phoneNumberField).sendKeys(phoneNumber);
+    }
+
+    public boolean firstOrderOpen() {
+        return driver.findElement(nameField).isDisplayed();
     }
 
     public void clickNextButton() {
