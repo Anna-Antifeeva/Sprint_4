@@ -44,10 +44,6 @@ public class OrderPage {
         driver.findElement(phoneNumberField).sendKeys(phoneNumber);
     }
 
-    public boolean firstOrderOpen() {
-        return driver.findElement(nameField).isDisplayed();
-    }
-
     public void clickNextButton() {
         driver.findElement(nextButton).click();
     }

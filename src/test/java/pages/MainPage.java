@@ -27,6 +27,10 @@ public class MainPage {
 
     }
 
+    public void openPage() {
+        driver.get("https://qa-scooter.praktikum-services.ru/");
+    }
+
     public void clickTopOrderButton() {
         driver.findElement(topButtonOrder).click();
     }
