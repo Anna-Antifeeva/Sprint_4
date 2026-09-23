@@ -31,12 +31,12 @@ public class MainPage {
         driver.get("https://qa-scooter.praktikum-services.ru/");
     }
 
-    public void clickTopOrderButton() {
-        driver.findElement(topButtonOrder).click();
-    }
-
-    public void clickBottomButtonOrder() {
-        driver.findElement(bottomButtonOrder).click();
+    public void clickButtonOrder(String buttonType) {
+        if (buttonType.equals("верхняя")) {
+            driver.findElement(topButtonOrder).click();
+        } else {
+            driver.findElement(bottomButtonOrder).click();
+        }
     }
 
     public String getAnswerText(String panelId) {

@@ -1,6 +1,5 @@
 package order;
 
-import org.openqa.selenium.By;
 import pages.DriverFactory;
 import pages.MainPage;
 import pages.OrderPage;
@@ -25,9 +24,9 @@ public class OrderTests {
     private final String rentalPeriod;
     private final String colour;
     private final String comment;
-    private final By orderButtonLocator;
+    private final String buttonType;
 
-    public OrderTests(String name, String surname, String address, String metroStation, String phoneNumber, String orderDate, String rentalPeriod, String colour, String comment, By orderButtonLocator) {
+    public OrderTests(String name, String surname, String address, String metroStation, String phoneNumber, String orderDate, String rentalPeriod, String colour, String comment, String buttonType) {
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -37,15 +36,15 @@ public class OrderTests {
         this.rentalPeriod = rentalPeriod;
         this.colour = colour;
         this.comment = comment;
-        this.orderButtonLocator = orderButtonLocator;
+        this.buttonType = buttonType;
     }
 
     @Parameterized.Parameters
 
     public static Object[][] getCredentials() {
         return new Object[][]{
-                {"Анна", "Петрова", "Москва, ул. Ленина 87, 35", "Черкизовская", "+79999999999", "16.10.2026", "сутки", "серая безысходность", "Нет комментариев", By.xpath(".//div[@class='Header_Header__214zg']//button[text()='Заказать']")},
-                {"Максим", "Эдурадов", "Волгоград, ул. Псковская 33, 66", "Чистые пруды", "+78247389922", "25.12.2026", "пятеро суток", "чёрный жемчуг", "кап",By.xpath(".//div[@class='Home_FinishButton__1_cWm']//button[text()='Заказать']")},
+                {"Анна", "Петрова", "Москва, ул. Ленина 87, 35", "Черкизовская", "+79999999999", "16.10.2026", "сутки", "серая безысходность", "Нет комментариев", "верхняя"},
+                {"Максим", "Эдурадов", "Волгоград, ул. Псковская 33, 66", "Чистые пруды", "+78247389922", "25.12.2026", "пятеро суток", "чёрный жемчуг", "кап", "нижняя"},
         };
     }
 
@@ -62,7 +61,7 @@ public class OrderTests {
         MainPage mainPage = new MainPage(driver);
         mainPage.openPage();
         mainPage.clickCookie();
-        driver.findElement(orderButtonLocator).click();
+        mainPage.clickButtonOrder(buttonType);
 
         OrderPage orderPage = new OrderPage(driver);
         orderPage.fillingFirstLoginForm(name, surname, address, metroStation, phoneNumber);
